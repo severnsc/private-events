@@ -1,0 +1,12 @@
+<footer class="footer">
+  <nav>
+    <ul>
+      <li><%= link_to "Home",   root_path %></li>
+      <% if logged_in? %>
+      	<li><%= link_to "Profile", '#' %></li>
+      <% else %>
+      	<li><%= link_to "Log in", '#' %></li>
+      <% end %>
+    </ul>
+  </nav>
+</footer>
