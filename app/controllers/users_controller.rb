@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	before_action :logged_in, only: [:show, :index, :edit, :destroy]
+	before_action :correct_user, only: [:edit]
 
 	def new
 		@user = User.new
@@ -16,6 +18,7 @@ class UsersController < ApplicationController
 	end
 
 	def index
+		@users = User.all.paginate(page: params[:page])
 	end
 
 	def show
@@ -28,13 +31,23 @@ class UsersController < ApplicationController
 	def update
 	end
 
-	def delete
-	end
-
 	def destroy
 	end
 
 	private
+
+	def logged_in
+		unless logged_in?
+			store_location
+			flash[:danger] = "Please log in"
+			redirect_to login_url
+		end
+	end
+
+	def correct_user
+		@user = User.find(params[:id])
+		redirect_to current_user unless current_user?(@user)
+	end
 
 	def user_params
 		params.require(:user).permit(:email, :name, :password, :password_confirmation)

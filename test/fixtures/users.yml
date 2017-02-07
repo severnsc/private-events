@@ -1,4 +1,9 @@
 chris:
-  name: Chris
-  email: severnsc@gmail.com
+  name: "Chris"
+  email: "severnsc@gmail.com"
+  password_digest: <%= User.digest('password') %>
+
+archer:
+  name: "archer"
+  email: "archer@isis.com"
   password_digest: <%= User.digest('password') %>
