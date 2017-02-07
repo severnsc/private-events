@@ -4,6 +4,15 @@ module SessionsHelper
 		session[:user_id] = user.id
 	end
 
+	def redirect_user_or_default(default)
+		if !session[:forwarding_url].nil?
+			redirect_to session[:forwarding_url]
+			session[:forwarding_url] = nil
+		else
+			redirect_to default
+		end
+	end
+
 	def store_location
 		session[:forwarding_url] = request.original_url if request.get?
 	end
