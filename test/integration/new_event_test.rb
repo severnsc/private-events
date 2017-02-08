@@ -17,7 +17,8 @@ class NewEventTest < ActionDispatch::IntegrationTest
 			post events_path, params: { event: { name:"",
 												 date: "",
 												 location: "",
-												 host_id: ""}}
+												 host_id: "",
+												 description: ""}}
 		end
 		assert_template 'events/new'
 		assert_select 'div#error_explanation'
@@ -32,7 +33,8 @@ class NewEventTest < ActionDispatch::IntegrationTest
 			post events_path, params: { event: { name: "Test Event",
 												 date: Time.zone.now,
 												 location: "my house",
-												 host_id: @user.id}}
+												 host_id: @user.id,
+												 description: "This is an event"}}
 		end
 		@event = Event.find_by(name: "Test Event")
 		assert_redirected_to event_path(@event)

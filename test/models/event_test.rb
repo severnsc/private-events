@@ -4,7 +4,7 @@ class EventTest < ActiveSupport::TestCase
   
   def setup
   	@user = users(:chris)
-  	@event = Event.new(name: "Example event", date: Time.zone.now, location: "My house", host_id: @user.id)
+  	@event = Event.new(name: "Example event", date: Time.zone.now, location: "My house", host_id: @user.id, description: "It's an event!")
   end
 
   test "event should be valid" do
@@ -39,5 +39,10 @@ class EventTest < ActiveSupport::TestCase
   test "event should have a host" do
   	@event.host_id = "  "
   	assert_not @event.valid?
+  end
+
+  test "event should have a description" do
+    @event.description = "   "
+    assert_not @event.valid?
   end
 end

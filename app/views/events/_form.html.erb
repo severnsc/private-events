@@ -10,6 +10,9 @@
 	<%= f.label :location %>
 	<%= f.text_field :location, class: 'form-control' %>
 
+	<%= f.label :description %>
+	<%= f.text_area :description, class: 'form-control' %>
+
 	<%= f.hidden_field :host_id, value: current_user.id %>
 
 	<%= f.submit yield(:button_text), class: 'btn btn-primary' %>

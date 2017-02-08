@@ -3,6 +3,7 @@ event:
   date: <%= Time.zone.now %>
   location: "My house"
   host: chris
+  description: "This is an event"
 
 <% 30.times do |n| %>
 event-<%= n %>:
@@ -10,4 +11,5 @@ event-<%= n %>:
   date: <%= Time.zone.now %>
   location: "Here"
   host: chris
+  description: "This is an event"
 <% end %>
