@@ -2,4 +2,12 @@ event:
   name: "Event"
   date: <%= Time.zone.now %>
   location: "My house"
-  host_id: chris.id
+  host: chris
+
+<% 30.times do |n| %>
+event-<%= n %>:
+  name: "Event"
+  date: <%= Time.zone.now %>
+  location: "Here"
+  host: chris
+<% end %>

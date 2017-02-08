@@ -1,0 +1,16 @@
+<% provide(:title, "All events") %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= will_paginate %>
+		<h2>All Events</h2>
+		<% @events.each do |event| %>
+			<div class="events">
+				<%= link_to event.name, event %> | 
+				<%= event.date.strftime('%B %e, %Y') %> | 
+				<%= event.location %> | 
+				<%= event.host.name %>
+			</div>
+		<% end %>
+		<%= will_paginate %>
+	</div>
+</div>
