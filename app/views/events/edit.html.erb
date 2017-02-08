@@ -1,0 +1,9 @@
+<% provide(:title, "Edit "+@event.name) %>
+<% provide(:url, event_path(@event)) %>
+<% provide(:button_text, "Update event") %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h2>Edit <%= @event.name %></h2>
+		<%= render 'events/form' %>
+	</div>
+</div>
