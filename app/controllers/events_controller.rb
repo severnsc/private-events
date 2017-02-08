@@ -41,6 +41,7 @@ class EventsController < ApplicationController
 	def destroy
 		@event = Event.find(params[:id])
 		@event.delete
+		flash[:success] = "Event deleted!"
 		redirect_to current_user
 	end
 
