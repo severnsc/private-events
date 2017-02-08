@@ -5,4 +5,5 @@ class Event < ApplicationRecord
 	validates :location, presence: true, length: { maximum: 255 }
 	validates :host, presence: true
 	validates :description, presence: true
+	has_many :invitations
 end

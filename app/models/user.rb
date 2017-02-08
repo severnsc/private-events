@@ -8,6 +8,7 @@ class User < ApplicationRecord
 	validates :password, presence:true, length: {minimum: 8}, allow_nil: true
 	has_secure_password
 	has_many :events, foreign_key: :host_id
+	has_many :invitations, foreign_key: :invitee_id
 
 	def User.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

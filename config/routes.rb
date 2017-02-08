@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :invitations
+
   resources :events
 
   resources :users, except: [:new, :create]
