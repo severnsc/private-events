@@ -36,8 +36,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "get edit should redirect unless logged in and correct user" do
-  	get edit_event_path(@event)
-  	assert_redirected_to login_path
   	log_in_as(@other_user)
   	assert_redirected_to user_path(@other_user)
   	log_in_as(@user)
