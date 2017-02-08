@@ -1,0 +1,16 @@
+<%= form_for(@invitation, url: yield(:url)) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+
+	<%= f.label :invitee_email, "Invitee Email" %>
+	<%= f.email_field :invitee_email, class: 'form-control' %>
+
+	<%= f.hidden_field :event_id, value: @event.id %>
+
+	<% if yield(:url) == invitations_path %>
+		<%= f.hidden_field :rsvp, value: "no response" %>
+	<% else %>
+		<%= f.select(:rsvp, ["Going", "Maybe", "Not Going"]) %>
+	<% end %>
+
+	<%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+<% end %>

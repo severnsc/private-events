@@ -1,18 +1,21 @@
 class InvitationsController < ApplicationController
-	before_action :logged_in, only:[:new, :index, :edit, :show, :destroy]
+	before_action :logged_in, only:[:index, :edit, :show, :destroy]
 	before_action :correct_user, only:[:edit, :destroy, :show]
 
-	def new
-		@invitation = Invitation.new
-	end
-
 	def create
-		@invitation = Invitation.new(invitation_params)
-		if @invitation.save
-			flash[:success] = "Invitation sent!"
-			redirect_to event_path(@invitation.event_id)
+		@invitee = User.find_by_email(params[:invitation][:invitee_email])
+		if @invitee
+			@invitation = Invitation.new(invitation_params)
+			@invitation.invitee_id = @invitee.id
+			if @invitation.save
+				flash[:success] = "Invitation sent!"
+				redirect_to event_path(params[:invitation][:event_id])
+			else
+				redirect_to event_path(params[:invitation][:event_id])
+			end
 		else
-			render 'new'
+			flash[:danger] = "User not found"
+			redirect_to event_path(params[:invitation][:event_id])
 		end
 	end
 
@@ -22,14 +25,22 @@ class InvitationsController < ApplicationController
 
 	def edit
 		@invitation = Invitation.find(params[:id])
+		@event = @invitation.event
 	end
 
 	def update
+		@invitee = User.find_by_email(params[:invitation][:invitee_email])
 		@invitation = Invitation.find(params[:id])
-		if @invitation.update_attributes(invitation_params)
-			flash[:success] = "Invitation updated!"
-			redirect_to event_path(@invitation.event_id)
+		if @invitee
+			@invitation.invitee_id = @invitee.id
+			if @invitation.update_attributes(invitation_params)
+				flash[:success] = "Invitation updated!"
+				redirect_to event_path(params[:invitation][:event_id])
+			else
+				redirect_to event_path(params[:invitation][:event_id])
+			end
 		else
+			flash.now[:danger] = "User not found"
 			render 'edit'
 		end
 	end
@@ -62,6 +73,6 @@ class InvitationsController < ApplicationController
 	end
 
 	def invitation_params
-		params.require(:invitation).permit(:invitee_id, :event_id, :rsvp)
+		params.require(:invitation).permit(:event_id, :rsvp)
 	end
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :invitations
+  resources :invitations, except: [:new]
 
   resources :events
 

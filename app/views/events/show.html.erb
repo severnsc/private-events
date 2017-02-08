@@ -1,4 +1,6 @@
 <% provide(:title, @event.name) %>
+<% provide(:url, invitations_path) %>
+<% provide(:button_text, "Send invitation") %>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<h2><%= @event.name %></h2>
@@ -6,5 +8,6 @@
 		<p>Location: <%= @event.location %></p>
 		<p>Host: <%= @event.host.name %></p>
 		<p><%= @event.description %></p>
+		<%= render 'invitations/form' %>
 	</div>
 </div>
