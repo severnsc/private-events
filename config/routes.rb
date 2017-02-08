@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :events
+
   resources :users, except: [:new, :create]
 
   get '/login', to: 'sessions#new'

@@ -1,0 +1,16 @@
+<%= form_for(@event, url: yield(:url)) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name, class: 'form-control' %>
+
+	<%= f.label :date %>
+	<%= f.date_field :date, class: 'form-control' %>
+
+	<%= f.label :location %>
+	<%= f.text_field :location, class: 'form-control' %>
+
+	<%= f.hidden_field :host_id, value: current_user.id %>
+
+	<%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+<% end %>
