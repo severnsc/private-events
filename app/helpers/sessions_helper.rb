@@ -4,6 +4,10 @@ module SessionsHelper
 		session[:user_id] = user.id
 	end
 
+	def log_out
+		session[:user_id] = nil
+	end
+
 	def redirect_user_or_default(default)
 		if !session[:forwarding_url].nil?
 			redirect_to session[:forwarding_url]

@@ -51,7 +51,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   	log_in_as(@other_user)
   	assert_redirected_to user_path(@other_user)
   	log_in_as(@user)
-  	delete events_path(@event)
+  	delete event_path(@event)
   	assert_redirected_to user_path(@user)
   	assert_not flash.empty?
   end
