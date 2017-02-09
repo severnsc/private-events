@@ -6,7 +6,7 @@
 		<% @events.each do |event| %>
 			<div class="events">
 				<%= link_to event.name, event %> | 
-				<%= event.date.strftime('%B %e, %Y') %> | 
+				<%= event.date.strftime('%B %e, %Y') %> at <%= event.time.strftime('%I:%M %p') %> | 
 				<%= event.location %> | 
 				<%= event.host.name %>
 			</div>

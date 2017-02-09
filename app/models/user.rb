@@ -16,6 +16,22 @@ class User < ApplicationRecord
 		BCrypt::Password.create(string, cost: cost)													  
 	end
 
+	def coming_up_events
+		going_invitations = self.invitations.where('rsvp == "going"')
+		events = []
+		going_invitations.each do |invitation|
+			events << invitation.event if invitation.event.date > Time.zone.now
+		end
+		events
+	end
+
+	def need_rsvp
+		invitations = self.invitations.find_by(rsvp: "no response")
+		invites = []
+		invitations.is_a?(Invitation) ? invites << invitations : invitations.each {|i| invites << i}
+		invites
+	end
+
 	private
 
 	def downcase_email

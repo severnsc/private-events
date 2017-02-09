@@ -2,4 +2,48 @@
 	<div class="col-md-6 col-md-offset-3">
 		<h2><%= @user.name %></h2>
 	</div>
+	<div class="col-md-4" id="hosted_events">
+		<h2>Events you're hosting</h2>
+		<% if @user.events.any? %>
+			<% @user.events.each do |event| %>
+				<div class="event">
+					<%= link_to event.name, event %> | 
+					<%= event.date.strftime('%B %e, %Y') %> at <%= event.time.strftime('%I:%M %p') %> | 
+					<%= event.location %>
+				</div>
+			<% end %>
+		<% else %>
+			<p>You're not hosting any events!</p>
+		<% end %>
+	</div>
+	<div class="col-md-4" id="events_going_to">
+		<h2>Events coming up that you're attending</h2>
+		<% if @user.coming_up_events.any? %>
+			<%= @user.coming_up_events.each do |event| %>
+				<div class="event">
+					<%= link_to event.name, event %> | 
+					<%= event.date.strftime('%B %e, %Y') %> at <%= event.time.strftime('%I:%M %p') %> | 
+					<%= event.location %>
+				</div>
+			<% end %>
+		<% else %>
+			<p>You have no events coming up!</p>
+		<% end %>
+	</div>
+	<div class="col-md-4" id="need_rsvp">
+		<h2>Invitations you need to RSVP to</h2>
+		<% if @user.need_rsvp.any? %>
+			<% @user.need_rsvp.each do |invitation| %>
+				<div class="invitation">
+					<%= link_to invitation.event.name, invitation.event %> | 
+					<%= invitation.event.date.strftime('%B %e, %Y') %> at <%= invitation.event.time.strftime('%I:%M %p') %> | 
+					<%= invitation.event.location %> | 
+					<%= link_to invitation.event.host.name, invitation.event.host %> | 
+					<%= link_to "RSVP", edit_invitation_path(invitation) %>
+				</div>
+			<% end %>
+		<% else %>
+			<p>You have no events to RSVP to!</p>
+		<% end %>
+	</div>
 </div>
