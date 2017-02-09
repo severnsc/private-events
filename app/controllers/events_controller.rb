@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 	before_action :logged_in, only: [:new, :index, :show, :edit, :destroy]
 	before_action :correct_user, only: [:edit, :destroy]
+	rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
 	def new
 		@event = Event.new
@@ -47,6 +48,10 @@ class EventsController < ApplicationController
 	end
 
 	private
+
+	def record_not_found
+		redirect_to current_user
+	end
 
 	def logged_in
 		unless logged_in?

@@ -11,6 +11,7 @@ class InvitationsController < ApplicationController
 				flash[:success] = "Invitation sent!"
 				redirect_to event_path(params[:invitation][:event_id])
 			else
+				flash[:danger] = "Bad rsvp"
 				redirect_to event_path(params[:invitation][:event_id])
 			end
 		else

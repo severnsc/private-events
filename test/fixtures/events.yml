@@ -5,6 +5,13 @@ event:
   host: chris
   description: "This is an event"
 
+event2:
+  name: "Event2"
+  date: <%= Time.zone.now + 1.year %>
+  location: "His house"
+  host: chris
+  description: "This is another event"
+
 <% 30.times do |n| %>
 event-<%= n %>:
   name: "Event"

@@ -9,5 +9,14 @@
 		<p>Host: <%= @event.host.name %></p>
 		<p><%= @event.description %></p>
 		<%= render 'invitations/form' %>
+		<% if @event.reload.invitations.any? %>
+			<h2>Invitations</h2>
+			<% @event.invitations.each do |invitation| %>
+				<div class="invitation">
+					<%= link_to invitee_name(invitation.invitee_id), invitee(invitation.invitee_id) %> | 
+					<%= invitation.rsvp %>
+				</div>
+			<% end %>
+		<% end %>
 	</div>
 </div>
