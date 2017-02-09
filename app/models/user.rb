@@ -28,6 +28,7 @@ class User < ApplicationRecord
 	def need_rsvp
 		invitations = self.invitations.find_by(rsvp: "no response")
 		invites = []
+		return invites if invitations.nil?
 		invitations.is_a?(Invitation) ? invites << invitations : invitations.each {|i| invites << i}
 		invites
 	end
