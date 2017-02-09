@@ -4,7 +4,7 @@
 	<%= f.label :invitee_email, "Invitee Email" %>
 	<%= f.email_field :invitee_email, class: 'form-control' %>
 
-	<%= f.hidden_field :event_id, value: @event.id %>
+	<%= f.hidden_field :event_id, value: @invitation.event_id %>
 
 	<% if yield(:url) == invitations_path %>
 		<%= f.hidden_field :rsvp, value: "no response" %>
