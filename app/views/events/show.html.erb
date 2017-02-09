@@ -17,6 +17,9 @@
 					<%= invitation.rsvp %> | 
 					<%= link_to "See invitation", invitation %> | 
 					<%= link_to "Edit invitation", edit_invitation_path(invitation) %>
+					<% if current_user = invitation.event.host %>
+						| <%= link_to "Delete Invitation", invitation, method: :delete %>
+					<% end %>
 				</div>
 			<% end %>
 		<% end %>
