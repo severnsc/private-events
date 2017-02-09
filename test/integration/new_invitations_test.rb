@@ -23,7 +23,7 @@ class NewInvitationsTest < ActionDispatch::IntegrationTest
 		follow_redirect!
 		assert_not flash.empty?
 		assert_template 'events/show'
-		assert_select 'div.invitation', count:0
+		assert_select 'div.invitation', count:1
 		#Invalid event_id
 		assert_no_difference 'Invitation.count' do
 			post invitations_path, params: { invitation: { invitee_email: @invitee.email,
@@ -63,6 +63,6 @@ class NewInvitationsTest < ActionDispatch::IntegrationTest
 		follow_redirect!
 		assert_not flash.empty?
 		assert_template 'events/show'
-		assert_select 'div.invitation', count:1
+		assert_select 'div.invitation', count:2
 	end
 end

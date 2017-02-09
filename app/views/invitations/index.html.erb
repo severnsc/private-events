@@ -5,7 +5,7 @@
 			<%= will_paginate %>
 			<% @invitations.each do |invitation| %>
 				<div class="invitation">
-					<%= invitation.event.name %> | 
+					<%= link_to invitation.event.name, invitation.event %> | 
 					<%= invitation.event.date %> at <%= invitation.event.time %> | 
 					<%= invitation.event.location %> | 
 					<%= link_to invitation.event.host.name, invitation.event.host %> | 

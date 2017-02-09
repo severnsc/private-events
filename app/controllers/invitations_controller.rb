@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+	include InvitationsHelper
 	before_action :logged_in, only:[:index, :edit, :show, :destroy]
 	before_action :correct_user, only:[:edit, :destroy, :show]
 
@@ -21,7 +22,7 @@ class InvitationsController < ApplicationController
 	end
 
 	def index
-		@invitations = Invitation.all.paginate(page: params[:page])
+		@invitations = Invitation.where(id: all_invitations(current_user).map(&:id)).paginate(page: params[:page])
 	end
 
 	def edit

@@ -2,3 +2,15 @@ invite:
   invitee: archer
   event: event2
   rsvp: "no response"
+
+invite2:
+  invitee: archer
+  event: event
+  rsvp: "no response"
+
+<% 30.times do |n| %>
+invite-<%= n %>:
+  invitee: archer
+  event: event2
+  rsvp: "no response"
+<% end %>
