@@ -32,6 +32,7 @@ class NewEventTest < ActionDispatch::IntegrationTest
 		assert_difference 'Event.count', 1 do
 			post events_path, params: { event: { name: "Test Event",
 												 date: Time.zone.now,
+												 time: Time.zone.now,
 												 location: "my house",
 												 host_id: @user.id,
 												 description: "This is an event"}}

@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<h2><%= @event.name %></h2>
-		<p>Date: <%= @event.date.strftime('%B %e, %Y') %></p>
+		<p>Date: <%= @event.date.strftime('%B %e, %Y') %> at <%= @event.time.strftime('%I:%M %p') %></p>
 		<p>Location: <%= @event.location %></p>
 		<p>Host: <%= @event.host.name %></p>
 		<p><%= @event.description %></p>
@@ -14,7 +14,9 @@
 			<% @event.invitations.each do |invitation| %>
 				<div class="invitation">
 					<%= link_to invitee_name(invitation.invitee_id), invitee(invitation.invitee_id) %> | 
-					<%= invitation.rsvp %>
+					<%= invitation.rsvp %> | 
+					<%= link_to "See invitation", invitation %> | 
+					<%= link_to "Edit invitation", edit_invitation_path(invitation) %>
 				</div>
 			<% end %>
 		<% end %>

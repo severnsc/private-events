@@ -1,0 +1,9 @@
+<% provide(:title, "Invitation to " + @invitation.event.name) %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h2>Invitation for <%= current_user.name %> to <%= @invitation.event.name %></h2>
+		<p>Event date: <%= @invitation.event.date.strftime('%B %e, %Y') %> at <%= @invitation.event.time.strftime('%I:%M %p') %></p>
+		<p>Event location: <%= @invitation.event.location %></p>
+		<p>Event host: <%= link_to @invitation.event.host.name, @invitation.event.host %></p>
+	</div>
+</div>
