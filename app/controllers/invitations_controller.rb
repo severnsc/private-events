@@ -21,7 +21,7 @@ class InvitationsController < ApplicationController
 	end
 
 	def index
-		@invitations = Invitation.all.pagiante(page: params[:page])
+		@invitations = Invitation.all.paginate(page: params[:page])
 	end
 
 	def edit
