@@ -8,7 +8,7 @@ class InvitationsEditTest < ActionDispatch::IntegrationTest
 		@invitee = User.find(@invitation.invitee_id)
 	end
 
-	test "submitting with invalid information" do
+	test "submitting with invalid information as host" do
 		get edit_invitation_path(@invitation)
 		assert_redirected_to login_path
 		log_in_as(@user)
@@ -47,8 +47,23 @@ class InvitationsEditTest < ActionDispatch::IntegrationTest
 		assert_template 'events/show'
 	end
 
-	test "submitting with valid information" do
+	test "submitting with valid information as host" do
 		log_in_as(@user)
+		get edit_invitation_path(@invitation)
+		assert_template 'invitations/edit'
+		assert_select 'form[action=?]', invitation_path(@invitation)
+		patch invitation_path(@invitation), params: { invitation: { invitee_email: @invitee.email,
+																	event_id: @invitation.event_id,
+																	rsvp: "Going"}}
+		assert_equal "Going", @invitation.reload.rsvp
+		assert_redirected_to event_path(@invitation.event_id)
+		follow_redirect!
+		assert_not flash.empty?
+		assert_template 'events/show'
+	end
+
+	test "submitting with valid information as invitee" do
+		log_in_as(@invitee)
 		get edit_invitation_path(@invitation)
 		assert_template 'invitations/edit'
 		assert_select 'form[action=?]', invitation_path(@invitation)
