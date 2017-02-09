@@ -1,8 +1,12 @@
 <%= form_for(@invitation, url: yield(:url)) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 
-	<%= f.label :invitee_email, "Invitee Email" %>
-	<%= f.email_field :invitee_email, class: 'form-control' %>
+	<% if current_user == @invitation.event.host %>
+
+		<%= f.label :invitee_email, "Invitee Email" %>
+		<%= f.email_field :invitee_email, class: 'form-control' %>
+
+	<% end %>
 
 	<%= f.hidden_field :event_id, value: @invitation.event_id %>
 

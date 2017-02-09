@@ -16,6 +16,7 @@ class InvitationsEditTest < ActionDispatch::IntegrationTest
 		follow_redirect!
 		assert_template 'invitations/edit'
 		assert_select 'form[action=?]', invitation_path(@invitation)
+		assert_select 'input[name="invitation[invitee_email]"]'
 		#Invalid email
 		email = "1234@me.com"
 		patch invitation_path(@invitation), params: { invitation: { invitee_email: email,
@@ -52,6 +53,7 @@ class InvitationsEditTest < ActionDispatch::IntegrationTest
 		get edit_invitation_path(@invitation)
 		assert_template 'invitations/edit'
 		assert_select 'form[action=?]', invitation_path(@invitation)
+		assert_select 'input[name="invitation[invitee_email]"]'
 		patch invitation_path(@invitation), params: { invitation: { invitee_email: @invitee.email,
 																	event_id: @invitation.event_id,
 																	rsvp: "Going"}}
@@ -67,6 +69,7 @@ class InvitationsEditTest < ActionDispatch::IntegrationTest
 		get edit_invitation_path(@invitation)
 		assert_template 'invitations/edit'
 		assert_select 'form[action=?]', invitation_path(@invitation)
+		assert_select 'input[name="invitation[invitee_email]"]', count:0
 		patch invitation_path(@invitation), params: { invitation: { invitee_email: @invitee.email,
 																	event_id: @invitation.event_id,
 																	rsvp: "Going"}}
