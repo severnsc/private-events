@@ -7,4 +7,5 @@ class Event < ApplicationRecord
 	validates :description, presence: true
 	validates :time, presence: true
 	has_many :invitations
+	has_many :attendees, through: :invitations, source: :invitee
 end
