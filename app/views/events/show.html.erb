@@ -9,10 +9,11 @@
 		<p>Host: <%= @event.host.name %></p>
 		<p><%= @event.description %></p>
 		<%= render 'invitations/form' %>
+	</div>
+	<div class="col-md-6">
+		<h2>Invitations</h2>
 		<% if @event.reload.invitations.any? %>
-			<h2>Invitations</h2>
-			<% @event.invitations.each do |invitation| %>
-				<div class="invitation">
+			<% @event.invitations.each do |invitation| %>					<div class="invitation">
 					<%= link_to invitee_name(invitation.invitee_id), invitee(invitation.invitee_id) %> | 
 					<%= invitation.rsvp %> | 
 					<%= link_to "See invitation", invitation %> | 
@@ -22,6 +23,20 @@
 					<% end %>
 				</div>
 			<% end %>
+		<% else %>
+			<p>There are no invitations for this party!</p>
+		<% end %>
+	</div>
+	<div class="col-md-6">
+		<h2>Attendees</h2>
+		<% if @event.attendees.any? %>
+			<% @event.attendees.each do |attendee| %>
+				<div class="attendee">
+					<%= link_to attendee.name, attendee %>
+				</div>
+			<% end %>
+		<% else %>
+			<p>There are no attendees for this party!</p>
 		<% end %>
 	</div>
 </div>
