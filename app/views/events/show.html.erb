@@ -14,12 +14,12 @@
 		<h2>Invitations</h2>
 		<% if @event.reload.invitations.any? %>
 			<% @event.invitations.each do |invitation| %>					<div class="invitation">
-					<%= link_to invitee_name(invitation.invitee_id), invitee(invitation.invitee_id) %> | 
-					<%= invitation.rsvp %> | 
-					<%= link_to "See invitation", invitation %> | 
-					<%= link_to "Edit invitation", edit_invitation_path(invitation) %>
+					<p>Invitee: <%= link_to invitee_name(invitation.invitee_id), invitee(invitation.invitee_id) %></p> 
+					<p>RSVP: <%= invitation.rsvp %></p>
+					<p><%= link_to "See invitation", invitation %></p>
+					<p><%= link_to "Edit invitation", edit_invitation_path(invitation) %></p>
 					<% if current_user = invitation.event.host %>
-						| <%= link_to "Delete Invitation", invitation, method: :delete %>
+						<p><%= link_to "Delete Invitation", invitation, method: :delete %></p>
 					<% end %>
 				</div>
 			<% end %>

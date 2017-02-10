@@ -4,11 +4,11 @@
 		<%= will_paginate %>
 		<h2>All Events</h2>
 		<% @events.each do |event| %>
-			<div class="events">
-				<%= link_to event.name, event %> | 
-				<%= event.date.strftime('%B %e, %Y') %> at <%= event.time.strftime('%I:%M %p') %> | 
-				<%= event.location %> | 
-				<%= event.host.name %>
+			<div class="event">
+				<p>Event name: <%= link_to event.name, event %></p>
+				<p>Event date: <%= event.date.strftime('%B %e, %Y') %> at <%= event.time.strftime('%I:%M %p') %></p>
+				<p>Event location: <%= event.location %></p>
+				<p>Event host: <%= link_to event.host.name, event.host %></p>
 			</div>
 		<% end %>
 		<%= will_paginate %>
